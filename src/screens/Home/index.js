@@ -4,7 +4,7 @@ import CarouselItem from '../../components/CarouselItem';
 
 export default function HomeScreen({ navigation }) {
   const sampleData1 = [
-    { name: "Portal 2", imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg', description: "Portal 2 is a fun puzzle game developed by Valve.", platforms: ['playstation5', 'xbox-series-x', 'nintendo-switch', 'pc']},
+    { name: "Portal 2", gameId: 1, imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg', description: "Portal 2 is a fun puzzle game developed by Valve.", platforms: ['playstation5', 'xbox-series-x', 'nintendo-switch', 'pc']},
     { name: "Apex Legends", imageUrl: 'https://www.mobygames.com/images/covers/l/538006-apex-legends-xbox-one-front-cover.jpg'},
     { name: "Elden Ring", imageUrl: 'https://www.mobygames.com/images/covers/l/775869-elden-ring-xbox-one-front-cover.jpg'},
     { name: "Half-Life 2", imageUrl: "https://www.mobygames.com/images/covers/l/38738-half-life-2-windows-front-cover.jpg"}

@@ -23,14 +23,15 @@ functions: (API endpoints)
       - {platform} -> any of ["ps4", "nintendo-switch", etc.]
   - these list values can be hardcoded
 
-- getGameOfDay() -> game:
-  - returns a game object that is game of the day (can hardcode this to be any game)
+<!-- - getGameOfDay() -> game:
+  - returns a game object that is game of the day (can hardcode this to be any game) -->
 
 - getReviews(gameId : int) -> list[Review]:
   - returns a list of "Review" object of a given game
 
-- createReview(game : json) -> bool:
+- createReview(review : json) -> bool:
   - insert review as entry in review database
+  - update rating in game
   - return True if success
 
 - createUser(user: json) -> bool:
@@ -40,30 +41,36 @@ functions: (API endpoints)
 objects: (table in DynamoDB)
 
 - Review
-  - text : string (max 255 characters?)
   - Id : int
-  - userId: int (user)
+  - text : string (max 255 characters?)
+  - username: string (user)
   - gameId: int
   - platform: string
   - gameplay_rating: int
-  - performance: int
-  - fun: int
+  - performance_rating: int
+  - fun_rating: int
 
 - User
   - username: string (unique)
   - reviews: list[reviewId]
-  - games: list[Game]
+  - games: list[gameId]
 
-- Game
+- Game (mostly parse from https://api.rawg.io/docs/#operation/games_read)
   - Id: int
-  - platforms: list[platform]
-    - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
   - description
     - string 
   - name
     - Full name (not slug)
-  - store links: json{store_id: link}
-    - store_id 
+
+  - platforms: list[string] (Partition key??)
+    - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
+  - store links: string (Partition by platform)
+    - https://api.rawg.io/docs/#operation/games_stores_list
+    - for PC, just use steam (if doesn't exist, use Epic)
+  - num_reviews: int (partition by platform)
+    - increment whenever new review is added, used to calculate ratings
+  - ratings: int (partition by platform)
+    - use num_reviews to calculate
 
 single table with PK: game, SK: review?
 
