@@ -1,0 +1,615 @@
+{
+    "count": 14,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "name": "PC",
+        "slug": "pc",
+        "platforms": [
+          {
+            "id": 4,
+            "name": "PC",
+            "slug": "pc",
+            "games_count": 500109,
+            "image_background": "https://media.rawg.io/media/games/490/49016e06ae2103881ff6373248843069.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "PlayStation",
+        "slug": "playstation",
+        "platforms": [
+          {
+            "id": 187,
+            "name": "PlayStation 5",
+            "slug": "playstation5",
+            "games_count": 738,
+            "image_background": "https://media.rawg.io/media/games/253/2534a46f3da7fa7c315f1387515ca393.jpg",
+            "image": null,
+            "year_start": 2020,
+            "year_end": null
+          },
+          {
+            "id": 18,
+            "name": "PlayStation 4",
+            "slug": "playstation4",
+            "games_count": 6526,
+            "image_background": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 16,
+            "name": "PlayStation 3",
+            "slug": "playstation3",
+            "games_count": 3495,
+            "image_background": "https://media.rawg.io/media/games/d46/d46373f39458670305704ef089387520.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 15,
+            "name": "PlayStation 2",
+            "slug": "playstation2",
+            "games_count": 1956,
+            "image_background": "https://media.rawg.io/media/games/e60/e601c02ec49ef4f1d5ef147994b3935f.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 27,
+            "name": "PlayStation",
+            "slug": "playstation1",
+            "games_count": 1595,
+            "image_background": "https://media.rawg.io/media/games/bbc/bbce6f1659d35ffc16aed8b66e9990a1.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 19,
+            "name": "PS Vita",
+            "slug": "ps-vita",
+            "games_count": 1863,
+            "image_background": "https://media.rawg.io/media/games/f99/f9979698c43fd84c3ab69280576dd3af.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 17,
+            "name": "PSP",
+            "slug": "psp",
+            "games_count": 1571,
+            "image_background": "https://media.rawg.io/media/games/22b/22b61e8391b252cbd9be3317709cc68d.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Xbox",
+        "slug": "xbox",
+        "platforms": [
+          {
+            "id": 1,
+            "name": "Xbox One",
+            "slug": "xbox-one",
+            "games_count": 5440,
+            "image_background": "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 186,
+            "name": "Xbox Series S/X",
+            "slug": "xbox-series-x",
+            "games_count": 664,
+            "image_background": "https://media.rawg.io/media/games/739/73990e3ec9f43a9e8ecafe207fa4f368.jpg",
+            "image": null,
+            "year_start": 2020,
+            "year_end": null
+          },
+          {
+            "id": 14,
+            "name": "Xbox 360",
+            "slug": "xbox360",
+            "games_count": 2774,
+            "image_background": "https://media.rawg.io/media/games/157/15742f2f67eacff546738e1ab5c19d20.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 80,
+            "name": "Xbox",
+            "slug": "xbox-old",
+            "games_count": 712,
+            "image_background": "https://media.rawg.io/media/games/6e0/6e0c19bb111bd4fa20cf0eb72a049519.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "iOS",
+        "slug": "ios",
+        "platforms": [
+          {
+            "id": 3,
+            "name": "iOS",
+            "slug": "ios",
+            "games_count": 75774,
+            "image_background": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Android",
+        "slug": "android",
+        "platforms": [
+          {
+            "id": 21,
+            "name": "Android",
+            "slug": "android",
+            "games_count": 52141,
+            "image_background": "https://media.rawg.io/media/games/35b/35b47c4d85cd6e08f3e2ca43ea5ce7bb.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh",
+        "slug": "mac",
+        "platforms": [
+          {
+            "id": 5,
+            "name": "macOS",
+            "slug": "macos",
+            "games_count": 100905,
+            "image_background": "https://media.rawg.io/media/games/be0/be01c3d7d8795a45615da139322ca080.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 55,
+            "name": "Classic Macintosh",
+            "slug": "macintosh",
+            "games_count": 680,
+            "image_background": "https://media.rawg.io/media/games/38a/38af969459ad6e5de116ec8a4a84218c.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 41,
+            "name": "Apple II",
+            "slug": "apple-ii",
+            "games_count": 423,
+            "image_background": "https://media.rawg.io/media/games/271/271b23ee662efa73d8feb8712186e372.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Linux",
+        "slug": "linux",
+        "platforms": [
+          {
+            "id": 6,
+            "name": "Linux",
+            "slug": "linux",
+            "games_count": 74350,
+            "image_background": "https://media.rawg.io/media/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Nintendo",
+        "slug": "nintendo",
+        "platforms": [
+          {
+            "id": 7,
+            "name": "Nintendo Switch",
+            "slug": "nintendo-switch",
+            "games_count": 5078,
+            "image_background": "https://media.rawg.io/media/games/b72/b7233d5d5b1e75e86bb860ccc7aeca85.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 8,
+            "name": "Nintendo 3DS",
+            "slug": "nintendo-3ds",
+            "games_count": 1747,
+            "image_background": "https://media.rawg.io/media/games/369/36914d895c20e35f273286145c267764.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 9,
+            "name": "Nintendo DS",
+            "slug": "nintendo-ds",
+            "games_count": 2459,
+            "image_background": "https://media.rawg.io/media/games/a87/a8743bdee8627c55bb9f2f01b9136ac1.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 13,
+            "name": "Nintendo DSi",
+            "slug": "nintendo-dsi",
+            "games_count": 37,
+            "image_background": "https://media.rawg.io/media/screenshots/078/078629e997421ca28e9098bd7a87cb10.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 10,
+            "name": "Wii U",
+            "slug": "wii-u",
+            "games_count": 1236,
+            "image_background": "https://media.rawg.io/media/games/275/2759da6fcaa8f81f21800926168c85f6.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 11,
+            "name": "Wii",
+            "slug": "wii",
+            "games_count": 2314,
+            "image_background": "https://media.rawg.io/media/games/693/693952316d4b90984a92e7ab0f5c9b81.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 105,
+            "name": "GameCube",
+            "slug": "gamecube",
+            "games_count": 640,
+            "image_background": "https://media.rawg.io/media/games/683/6833fbb183fd72a61c032501e3bc6d36.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 83,
+            "name": "Nintendo 64",
+            "slug": "nintendo-64",
+            "games_count": 363,
+            "image_background": "https://media.rawg.io/media/games/5a1/5a145fe3002fc988140f7f00edcb9715.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 24,
+            "name": "Game Boy Advance",
+            "slug": "game-boy-advance",
+            "games_count": 954,
+            "image_background": "https://media.rawg.io/media/games/1cf/1cf9e301f1d27172546dcabc2f6cb597.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 43,
+            "name": "Game Boy Color",
+            "slug": "game-boy-color",
+            "games_count": 412,
+            "image_background": "https://media.rawg.io/media/screenshots/6fe/6fee3969b73bfccd935517c0c15826d8.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 26,
+            "name": "Game Boy",
+            "slug": "game-boy",
+            "games_count": 605,
+            "image_background": "https://media.rawg.io/media/games/363/363045c496b712600d0ff2dbbae1394c.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 79,
+            "name": "SNES",
+            "slug": "snes",
+            "games_count": 938,
+            "image_background": "https://media.rawg.io/media/games/637/637d7dc2f44d0f6ddd3ee2c0b1366962.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 49,
+            "name": "NES",
+            "slug": "nes",
+            "games_count": 958,
+            "image_background": "https://media.rawg.io/media/screenshots/347/347e1979dcf9b62dc48202b73317a186.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Atari",
+        "slug": "atari",
+        "platforms": [
+          {
+            "id": 28,
+            "name": "Atari 7800",
+            "slug": "atari-7800",
+            "games_count": 64,
+            "image_background": "https://media.rawg.io/media/screenshots/565/56504b28b184dbc630a7de118e39d822.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 31,
+            "name": "Atari 5200",
+            "slug": "atari-5200",
+            "games_count": 64,
+            "image_background": "https://media.rawg.io/media/screenshots/61a/61a60e3ee55941387681eaa59e3becbf.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 23,
+            "name": "Atari 2600",
+            "slug": "atari-2600",
+            "games_count": 286,
+            "image_background": "https://media.rawg.io/media/games/23e/23eecccb588a4a9c97f35ebf8f9f00ef.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 22,
+            "name": "Atari Flashback",
+            "slug": "atari-flashback",
+            "games_count": 30,
+            "image_background": "https://media.rawg.io/media/screenshots/2aa/2aa07f58491e14b0183333f8956bc802.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 25,
+            "name": "Atari 8-bit",
+            "slug": "atari-8-bit",
+            "games_count": 306,
+            "image_background": "https://media.rawg.io/media/screenshots/518/5180f00f3d4626c94bdb0259a07a2903.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 34,
+            "name": "Atari ST",
+            "slug": "atari-st",
+            "games_count": 835,
+            "image_background": "https://media.rawg.io/media/screenshots/d67/d676687085c1ad889e6d7ebcc826f946.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 46,
+            "name": "Atari Lynx",
+            "slug": "atari-lynx",
+            "games_count": 56,
+            "image_background": "https://media.rawg.io/media/screenshots/575/575b2838392ed177dd7d2c734c682f93.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 50,
+            "name": "Atari XEGS",
+            "slug": "atari-xegs",
+            "games_count": 22,
+            "image_background": "https://media.rawg.io/media/screenshots/769/7691726d70c23c029903df08858df001.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 112,
+            "name": "Jaguar",
+            "slug": "jaguar",
+            "games_count": 37,
+            "image_background": "https://media.rawg.io/media/screenshots/7dd/7dd630a9b38257450b53099932d3047d.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "Commodore / Amiga",
+        "slug": "commodore-amiga",
+        "platforms": [
+          {
+            "id": 166,
+            "name": "Commodore / Amiga",
+            "slug": "commodore-amiga",
+            "games_count": 2060,
+            "image_background": "https://media.rawg.io/media/screenshots/010/0101f021b2dc123c98969fda7e4bcd92.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "name": "SEGA",
+        "slug": "sega",
+        "platforms": [
+          {
+            "id": 167,
+            "name": "Genesis",
+            "slug": "genesis",
+            "games_count": 822,
+            "image_background": "https://media.rawg.io/media/screenshots/f7a/f7a70f1b271de9b92a9714db33e4c8ba.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 107,
+            "name": "SEGA Saturn",
+            "slug": "sega-saturn",
+            "games_count": 336,
+            "image_background": "https://media.rawg.io/media/games/003/003467edf5e2fd4bb14fb9f215e86fda.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 119,
+            "name": "SEGA CD",
+            "slug": "sega-cd",
+            "games_count": 159,
+            "image_background": "https://media.rawg.io/media/screenshots/48d/48d0aa77d8b4f226eefc0e72bc5be37d.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 117,
+            "name": "SEGA 32X",
+            "slug": "sega-32x",
+            "games_count": 46,
+            "image_background": "https://media.rawg.io/media/screenshots/dee/dee085e88fb024149a8a88d8f0cf9f91.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 74,
+            "name": "SEGA Master System",
+            "slug": "sega-master-system",
+            "games_count": 220,
+            "image_background": "https://media.rawg.io/media/screenshots/64a/64af1ca2f537454750e658de96422e2f.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 106,
+            "name": "Dreamcast",
+            "slug": "dreamcast",
+            "games_count": 346,
+            "image_background": "https://media.rawg.io/media/screenshots/a34/a34ba27adb076cc8e63916fef5cdde54.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          },
+          {
+            "id": 77,
+            "name": "Game Gear",
+            "slug": "game-gear",
+            "games_count": 214,
+            "image_background": "https://media.rawg.io/media/screenshots/2a5/2a5404773ab69671bb6585cd46dd0a97.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "name": "3DO",
+        "slug": "3do",
+        "platforms": [
+          {
+            "id": 111,
+            "name": "3DO",
+            "slug": "3do",
+            "games_count": 95,
+            "image_background": "https://media.rawg.io/media/screenshots/180/180b5f6e5d8c770bbbf941b9875046b6.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Neo Geo",
+        "slug": "neo-geo",
+        "platforms": [
+          {
+            "id": 12,
+            "name": "Neo Geo",
+            "slug": "neogeo",
+            "games_count": 113,
+            "image_background": "https://media.rawg.io/media/screenshots/c5c/c5c2eb93a958dcb370db6a51a5bc84a3.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Web",
+        "slug": "web",
+        "platforms": [
+          {
+            "id": 171,
+            "name": "Web",
+            "slug": "web",
+            "games_count": 245950,
+            "image_background": "https://media.rawg.io/media/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg",
+            "image": null,
+            "year_start": null,
+            "year_end": null
+          }
+        ]
+      }
+    ]
+  }

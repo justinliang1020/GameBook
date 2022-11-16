@@ -3,19 +3,19 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
 
 export default function CarouselItem(props) {
-    const post = props.post; // TODO: change name
+    const game = props.game; // TODO: change name
     const navigation = useNavigation();
     const goToGamePage = () => {
-        navigation.navigate("Game", { gameName: post.name });
+        navigation.navigate("Game", { game: game });
     }
     return (
         <Pressable onPress={goToGamePage}>
             <View style={styles.container}>
                 <Image
                     style={styles.gameCover}
-                    source={{ uri: post.imageUrl }}
+                    source={{ uri: game.imageUrl }}
                 />
-                <Text>{post.name}</Text>
+                <Text>{game.name}</Text>
             </View>
         </Pressable>
     )

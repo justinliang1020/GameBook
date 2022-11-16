@@ -4,7 +4,7 @@ import CarouselItem from '../../components/CarouselItem';
 
 export default function HomeScreen({ navigation }) {
   const sampleData1 = [
-    { name: "Portal 2", imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg'},
+    { name: "Portal 2", imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg', description: "Portal 2 is a fun puzzle game developed by Valve.", platforms: ['playstation5', 'xbox-series-x', 'nintendo-switch', 'pc']},
     { name: "Apex Legends", imageUrl: 'https://www.mobygames.com/images/covers/l/538006-apex-legends-xbox-one-front-cover.jpg'},
     { name: "Elden Ring", imageUrl: 'https://www.mobygames.com/images/covers/l/775869-elden-ring-xbox-one-front-cover.jpg'},
     { name: "Half-Life 2", imageUrl: "https://www.mobygames.com/images/covers/l/38738-half-life-2-windows-front-cover.jpg"}
@@ -15,18 +15,26 @@ export default function HomeScreen({ navigation }) {
     { name: "Splatoon 2", imageUrl: 'https://www.mobygames.com/images/covers/l/416101-splatoon-2-nintendo-switch-front-cover.jpg'},
     { name: "Overcooked 2", imageUrl: "https://www.mobygames.com/images/covers/l/487451-overcooked-2-windows-apps-front-cover.jpg"}
   ]
+  function getGameList(category) {
+    switch (category) {
+      case "rated":
+        return sampleData1;
+      case "trending":
+        return sampleData2;
+    }
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.subTitle}>Top Rated Cross Platform Games</Text>
       <FlatList
-        data={sampleData1}
-        renderItem={({item}) => <CarouselItem post={item}/>}
+        data={getGameList("rated")}
+        renderItem={({item}) => <CarouselItem game={item}/>}
         horizontal
       />
       <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
       <FlatList
-        data={sampleData2}
-        renderItem={({item}) => <CarouselItem post={item}/>}
+        data={getGameList("trending")}
+        renderItem={({item}) => <CarouselItem game={item}/>}
         horizontal
       />
       <Text style={styles.subTitle}>Popular Games in October</Text>
