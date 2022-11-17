@@ -46,9 +46,7 @@ objects: (table in DynamoDB)
   - username: string (user)
   - gameId: int
   - platform: string
-  - gameplay_rating: int
-  - performance_rating: int
-  - fun_rating: int
+  - rating: intß
 
 - User
   - username: string (unique)
@@ -61,7 +59,6 @@ objects: (table in DynamoDB)
     - string 
   - name
     - Full name (not slug)
-
   - platforms: list[string] (Partition key??)
     - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
   - store links: string (Partition by platform)
@@ -69,7 +66,7 @@ objects: (table in DynamoDB)
     - for PC, just use steam (if doesn't exist, use Epic)
   - num_reviews: int (partition by platform)
     - increment whenever new review is added, used to calculate ratings
-  - ratings: int (partition by platform)
+  - rating: number (partition by platform)
     - use num_reviews to calculate
 
 single table with PK: game, SK: review?
