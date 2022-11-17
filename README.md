@@ -47,8 +47,9 @@ objects: (table in DynamoDB)
 
 - Game (mostly parse from https://api.rawg.io/docs/#operation/games_read)
   - Id: int
-  - description
-    - string 
+  - description: string
+  - cover art URL: string
+    - (might be called background_image)
   - name
     - Full name (not slug)
   - platforms: list[string]
