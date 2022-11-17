@@ -46,7 +46,7 @@ objects: (table in DynamoDB)
   - username: string (user)
   - gameId: int
   - platform: string
-  - rating: intß
+  - rating: number
 
 - User
   - username: string (unique)

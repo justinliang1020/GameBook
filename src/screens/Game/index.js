@@ -1,10 +1,21 @@
-import { Pressable, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { Pressable, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Platform } from 'react-native';
 import React, { useState } from "react";
 import styles from "./styles"
 
 
 export default function Game({ route, navigation }) {
     const { game } = route.params
+    const review1 = {
+        id: 1,
+        text: "Portal is great on the xbox",
+        username: "Justin",
+        gameId: 1,
+        platform: "xbox-series-x",
+        rating: 4.5
+    }
+    function getReviews(gameId) {
+        return [review1]
+    }
     const parentPlatformImages = {
         "xbox": {
             active: require('../../../assets/xbox-active.png'),
@@ -47,44 +58,29 @@ export default function Game({ route, navigation }) {
     const parentPlatforms = [];
 
     for (const platform of game.platforms) {
-        parentPlatforms.push(platformsToParents[platform]) // only add to array if doesn't exist
+        const parent = platformsToParents[platform];
+        if (parentPlatforms.indexOf(parent) === -1) {
+            parentPlatforms.push(parent);
+        }
     }
 
-    const DATA = [
-        {
-          id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-          title: "First Item",
-        },
-        {
-          id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-          title: "Second Item",
-        },
-        {
-          id: "58694a0f-3da1-471f-bd96-145571e29d72",
-          title: "Third Item",
-        },
-      ];
-
-    const Item = ({ item, onPress, active }) => (
+    const ParentItem = ({ item, onPress, active }) => (
         <TouchableOpacity onPress={onPress}>
             <Image source={parentPlatformImages[item][active]}></Image>
         </TouchableOpacity>
             
     );
-    const renderItem = ({ item }) => {
-        // const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-        // const color = item.id === selectedId ? 'white' : 'black';
+    const renderParentItem = ({ item }) => {
         const active = item === selectedParent ? "active" : "inactive";
 
         return (
-            <Item
+            <ParentItem
                 item={item}
                 onPress={() => setSelectedParent(item)}
                 active={ active }
             />
         );
     };
-    const [selectedId, setSelectedId] = useState(null);
     const [selectedParent, setSelectedParent] = useState(null);
 
 
@@ -95,11 +91,18 @@ export default function Game({ route, navigation }) {
             <SafeAreaView style={styles.container}>
                 <FlatList
                     data={parentPlatforms}
-                    renderItem={renderItem}
+                    renderItem={renderParentItem}
                     horizontal
                 />
             </SafeAreaView>
-            <Text>Rating of {selectedParent}</Text>
+            {(() => {
+                switch(selectedParent) {
+                    case "xbox":
+                        return <Text>Xbox series x rating: {game.ratings['xbox-series-x']}, xbox one rating: {game.ratings['xbox-one']}</Text>
+                    case "playstation":
+                        return
+                }
+            })()}
             <Text>Reviews of {selectedParent}</Text>
         </View>
     )
