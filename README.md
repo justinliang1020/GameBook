@@ -1,10 +1,3 @@
-game:
-    - id : int (rawg)
-
-
-need to call API from backend?
-    - if call from frontend, we expose our API key
-  
 backend stuff
 -----------------------------------
 summary:
@@ -15,7 +8,7 @@ functions: (API endpoints)
 
 - getGameList(listType : string) -> list[game]:
   - returns a list of json objects of list type
-  - list type values can be ("trending", "popular")
+  - list type values can be ("trending", "popular", something else?)
   - these list values can be hardcoded
 
 - getReviews(gameId : int) -> list[Review]:
@@ -54,8 +47,6 @@ objects: (table in DynamoDB)
     - Full name (not slug)
   - platforms: list[string]
     - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
-  - num_reviews: int (json with key(platform): value(num_reviews))
-    - increment whenever new review is added (used to calculate rating)
   - rating: number (json with key(platform): value(rating))
     - use num_reviews to calculate
 
