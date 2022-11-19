@@ -4,7 +4,7 @@ import styles from "./styles"
 
 
 export default function Game({ route, navigation }) {
-    const { game } = route.params
+    // sample data -----
     const review1 = {
         id: 1,
         text: "Portal is great on the xbox",
@@ -21,6 +21,9 @@ export default function Game({ route, navigation }) {
         platform: "nintendo-switch",
         rating: 3
     }
+
+    // -----
+    const { game } = route.params
     function getReviews(gameId) {
         // change for API
         return [review1, review2]

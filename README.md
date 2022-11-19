@@ -11,8 +11,11 @@ functions: (API endpoints)
   - list type values can be ("trending", "popular", something else?)
   - these list values can be hardcoded
 
-- getReviews(gameId : int) -> list[Review]:
+- getGameReviews(gameId : int) -> list[Review]:
   - returns a list of "Review" object of a given game
+
+- getUserReviews(username : string) -> list[Reveiw]:
+  - returns a list of "Review" object of a given user
 
 - createReview(review : json) -> bool:
   - insert review as entry in review database
