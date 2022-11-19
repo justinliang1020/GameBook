@@ -35,7 +35,7 @@ objects: (table in DynamoDB)
   - gameId: int
   - platform: string
   - rating: number
-  - {
+  - sample: {
         id: 1,
         text: "Portal is great on the xbox",
         username: "Justin",
@@ -50,9 +50,9 @@ objects: (table in DynamoDB)
   - games: list[gameId]
 
 - Game (mostly parse from https://api.rawg.io/docs/#operation/games_read)
-  - Id: int
+  - gameId: int
   - description: string
-  - cover art URL: string
+  - imageUrl: string
     - (might be called background_image)
   - name
     - Full name (not slug)
