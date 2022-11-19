@@ -21,8 +21,8 @@ export default function Game({ route, navigation }) {
         platform: "nintendo-switch",
         rating: 3
     }
+    // -------------
 
-    // -----
     const { game } = route.params
     function getReviews(gameId) {
         // change for API

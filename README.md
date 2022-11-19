@@ -35,6 +35,14 @@ objects: (table in DynamoDB)
   - gameId: int
   - platform: string
   - rating: number
+  - {
+        id: 1,
+        text: "Portal is great on the xbox",
+        username: "Justin",
+        gameId: 1,
+        platform: "xbox-series-x",
+        rating: 4.5
+    }
 
 - User
   - username: string (unique)
@@ -52,6 +60,21 @@ objects: (table in DynamoDB)
     - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
   - rating: number (json with key(platform): value(rating))
     - use num_reviews to calculate
+  - sample: {
+      name: "Portal 2",
+      gameId: 1,
+      imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg',
+      description: "Portal 2 is a fun puzzle game developed by Valve.",
+      platforms: ['playstation5', 'playstation4', 'xbox-series-x', 'xbox-one', 'nintendo-switch', 'pc'],
+      ratings: {
+        'playstation5': 5,
+        'playstation4': 3.4,
+        'xbox-series-x': 4,
+        'xbox-one': 4.5,
+        'nintendo-switch': 3,
+        'pc': 5
+      }
+    },
 
 single table with PK: game, SK: review?
 
