@@ -16,6 +16,7 @@ export default function HomeScreen({ navigation }) {
         'xbox-series-x': 4,
         'xbox-one': 4.5,
         'nintendo-switch': 3,
+        'pc': 5
       }
     },
     { name: "Apex Legends", imageUrl: 'https://www.mobygames.com/images/covers/l/538006-apex-legends-xbox-one-front-cover.jpg' },

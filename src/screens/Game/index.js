@@ -13,9 +13,19 @@ export default function Game({ route, navigation }) {
         platform: "xbox-series-x",
         rating: 4.5
     }
-    function getReviews(gameId) {
-        return [review1]
+    const review2 = {
+        id: 2,
+        text: "Portal is great on the switch",
+        username: "Justin",
+        gameId: 1,
+        platform: "nintendo-switch",
+        rating: 3
     }
+    function getReviews(gameId) {
+        // change for API
+        return [review1, review2]
+    }
+    const reviews = getReviews(1);
     const parentPlatformImages = {
         "xbox": {
             active: require('../../../assets/xbox-active.png'),
@@ -50,13 +60,9 @@ export default function Game({ route, navigation }) {
         "playstation": ["playstation4", "playstation5"],
         "nintendo-switch": "nintendo-swith"
     }
-    // const reviews = getReviews();
-    const reviews = [
-        { id: 1, text: "This is the description of the review", username: "Justin", gameId: 1, platform: "xbox-series-x", gameplay_rating: 8, performance_rating: 9, fun_rating: 7 }
-    ];
-
+    
+    // data
     const parentPlatforms = [];
-
     for (const platform of game.platforms) {
         const parent = platformsToParents[platform];
         if (parentPlatforms.indexOf(parent) === -1) {
@@ -64,11 +70,26 @@ export default function Game({ route, navigation }) {
         }
     }
 
+    const reviewsByParent = {}
+    for (const review of reviews) {
+        const platform = review["platform"];
+        const parent = platformsToParents[platform]
+
+        if (!(parent in reviewsByParent)) {
+            reviewsByParent[parent] = []
+        }
+        reviewsByParent[parent].push(review)
+    }
+    console.log(reviewsByParent)
+
+    const [selectedParent, setSelectedParent] = useState(null);
+
+    // render items
     const ParentItem = ({ item, onPress, active }) => (
         <TouchableOpacity onPress={onPress}>
             <Image source={parentPlatformImages[item][active]}></Image>
         </TouchableOpacity>
-            
+
     );
     const renderParentItem = ({ item }) => {
         const active = item === selectedParent ? "active" : "inactive";
@@ -77,12 +98,10 @@ export default function Game({ route, navigation }) {
             <ParentItem
                 item={item}
                 onPress={() => setSelectedParent(item)}
-                active={ active }
+                active={active}
             />
         );
     };
-    const [selectedParent, setSelectedParent] = useState(null);
-
 
     return (
         <View>
@@ -96,14 +115,26 @@ export default function Game({ route, navigation }) {
                 />
             </SafeAreaView>
             {(() => {
-                switch(selectedParent) {
+                switch (selectedParent) {
                     case "xbox":
                         return <Text>Xbox series x rating: {game.ratings['xbox-series-x']}, xbox one rating: {game.ratings['xbox-one']}</Text>
                     case "playstation":
-                        return
+                        return <Text>Playstation 5 rating: {game.ratings['playstation5']}, Playstation 4 rating: {game.ratings['playstation4']}</Text>
+                    case "nintendo-switch":
+                        return <Text>Nintendo Switch rating: {game.ratings['nintendo-switch']}</Text>
+                    case "pc":
+                        return <Text>PC rating: {game.ratings['pc']}</Text>
+                    default:
+                        return <Text>Select a platform</Text>
                 }
             })()}
-            <Text>Reviews of {selectedParent}</Text>
+            {selectedParent &&
+            <FlatList
+                data={reviewsByParent[selectedParent]}
+                renderItem={({ item }) => <View><Text>{item.text}</Text></View>}
+                horizontal
+            />}
+            
         </View>
     )
 }

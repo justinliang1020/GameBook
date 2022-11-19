@@ -27,7 +27,7 @@ objects: (table in DynamoDB)
 
 - Review
   - Id : int
-  - text : string (max 255 characters?)
+  - text : string (max 255 characters, tweet-like)
   - username: string (user)
   - gameId: int
   - platform: string
