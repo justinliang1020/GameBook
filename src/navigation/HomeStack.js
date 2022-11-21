@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/Home";
@@ -7,29 +7,44 @@ import HomeScreen from "../screens/Home";
 const Stack = createStackNavigator();
 
 function CustomHeader() {
-    // #4786e7
     return (
         <View style={{
-            flexDirection: "row"
+            flexDirection: "row",
+            
         }}>
-            <Text>
-                meow
-            </Text>
-            <Text>
-                meow
-            </Text>
+            <View>
+                <Text style={styles.title}>
+                    Hey Justin!
+                </Text>
+                <Text>
+                    Welcome to your Gamebook
+                </Text>
+            </View>
+
+            <Image style={{ width: 30, height: 30, marginHorizontal: 40 }}
+                source={require("../../assets/profile.png")} />
         </View>
     )
 }
 
 export default function HomeStack() {
     return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Home"
-                    component={HomeScreen}
-                    options={{ headerTitle: (props) => <CustomHeader {...props} /> }}
-                />
-            </Stack.Navigator>
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    headerTitle: (props) => <CustomHeader {...props} />,
+                    headerStyle: { backgroundColor: "#4786e7" },
+                }}
+            />
+        </Stack.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: "bold",
+        fontSize: 20,
+    }
+})
