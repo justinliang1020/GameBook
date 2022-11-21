@@ -1,5 +1,4 @@
-import { Text, View, FlatList } from 'react-native';
-import styles from './styles'
+import { Text, View, FlatList, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import CarouselItem from '../../components/CarouselItem';
 
 export default function HomeScreen({ navigation }) {
@@ -38,21 +37,58 @@ export default function HomeScreen({ navigation }) {
     }
   }
   return (
-    <View style={styles.container}>
-      <Text style={styles.subTitle}>Top Rated Cross Platform Games</Text>
-      <FlatList
-        data={getGameList("rated")}
-        renderItem={({ item }) => <CarouselItem game={item} />}
-        horizontal
-      />
-      <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
-      <FlatList
-        data={getGameList("trending")}
-        renderItem={({ item }) => <CarouselItem game={item} />}
-        horizontal
-      />
-      <Text style={styles.subTitle}>Popular Games in October</Text>
-
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.subTitle}>Top Rated Cross Platform Games</Text>
+          <FlatList
+            data={getGameList("rated")}
+            renderItem={({ item }) => <CarouselItem game={item} big/>}
+            horizontal
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
+          <FlatList
+            data={getGameList("trending")}
+            renderItem={({ item }) => <CarouselItem game={item} />}
+            horizontal
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
+          <FlatList
+            data={getGameList("trending")}
+            renderItem={({ item }) => <CarouselItem game={item} />}
+            horizontal
+          />
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
+          <FlatList
+            data={getGameList("trending")}
+            renderItem={({ item }) => <CarouselItem game={item} />}
+            horizontal
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+  },
+  subTitle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+});
