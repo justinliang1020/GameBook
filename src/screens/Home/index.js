@@ -7,7 +7,8 @@ export default function HomeScreen({ navigation }) {
       name: "Portal 2",
       gameId: 1,
       imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg',
-      description: "Portal 2 is a fun puzzle game developed by Valve.",
+      screenshotUrl: 'https://i.ytimg.com/vi/Nz2us2JOhiU/maxresdefault.jpg',
+      description: "Portal 2 is a fun puzzle game developed by Valve Corporation. It is a puzzle game where you can shoot portals at walls and stuff. The cake is a lie.",
       platforms: ['playstation5', 'playstation4', 'xbox-series-x', 'xbox-one', 'nintendo-switch', 'pc'],
       ratings: {
         'playstation5': 5,

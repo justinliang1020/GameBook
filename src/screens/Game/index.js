@@ -1,7 +1,5 @@
-import { Pressable, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Platform } from 'react-native';
+import { Pressable, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import React, { useState } from "react";
-import styles from "./styles"
-
 
 export default function Game({ route, navigation }) {
     // sample data -----
@@ -63,7 +61,7 @@ export default function Game({ route, navigation }) {
         "playstation": ["playstation4", "playstation5"],
         "nintendo-switch": "nintendo-swith"
     }
-    
+
     // data
     const parentPlatforms = [];
     for (const platform of game.platforms) {
@@ -89,7 +87,7 @@ export default function Game({ route, navigation }) {
     // render items
     const ParentItem = ({ item, onPress, active }) => (
         <TouchableOpacity onPress={onPress}>
-            <Image source={parentPlatformImages[item][active]}></Image>
+            <Image style={styles.platformItem} source={parentPlatformImages[item][active]}></Image>
         </TouchableOpacity>
 
     );
@@ -106,16 +104,19 @@ export default function Game({ route, navigation }) {
     };
 
     return (
-        <View>
-            <Text>Title: {game.name}</Text>
-            <Text>Description: {game.description}</Text>
+        <SafeAreaView style={styles.backgroundContainer}>
+            <Text style={styles.title}>{game.name}</Text>
+            {!selectedParent && <Text style={styles.description}>{game.description}</Text>}
+            {!selectedParent && <Text style={styles.instructionText}>Select a platform to see reviews:</Text>}
             <SafeAreaView style={styles.container}>
-                <FlatList
+                <FlatList style={styles.platformSelector}
                     data={parentPlatforms}
                     renderItem={renderParentItem}
                     horizontal
+                    contentContainerStyle={styles.platformContentContainer}
                 />
             </SafeAreaView>
+            
             {(() => {
                 switch (selectedParent) {
                     case "xbox":
@@ -127,16 +128,67 @@ export default function Game({ route, navigation }) {
                     case "pc":
                         return <Text>PC rating: {game.ratings['pc']}</Text>
                     default:
-                        return <Text>Select a platform</Text>
+                        return (
+                            <View style={styles.placeholderContainer}>
+                                <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain"/>
+                            </View>
+
+                        )
                 }
             })()}
             {selectedParent &&
-            <FlatList
-                data={reviewsByParent[selectedParent]}
-                renderItem={({ item }) => <View><Text>{item.text}</Text></View>}
-                horizontal
-            />}
-            
-        </View>
+                <FlatList
+                    data={reviewsByParent[selectedParent]}
+                    renderItem={({ item }) => <View><Text>{item.text}</Text></View>}
+                    horizontal
+                />}
+
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    backgroundContainer: {
+        backgroundColor: "#4786e7",
+        width: "100%",
+        height: "100%",
+    },
+    title: {
+        fontSize: 36,
+        textAlign: "center",
+        color: "#ffffff",
+        fontWeight: "bold",
+        marginVertical: 30,
+    },
+    description: {
+        fontSize: 18,
+        textAlign: "center",
+        color: "#ffffff",
+        marginHorizontal: 10,
+    },
+    instructionText: {
+        fontsize: 25,
+        textAlign: "center",
+        color: "#ffffff",
+        marginTop: 20,
+    },
+    platformSelector: {
+        backgroundColor: "#ffffff",
+        marginHorizontal: 80,
+        marginVertical: 15,
+    },
+    platformContentContainer: {
+        justifyContent: "center",
+        flexGrow: 1,
+    },
+    platformItem: {
+        marginHorizontal: 10,
+    },
+    placeholderContainer: {
+        height: "60%",
+        marginHorizontal: 25,
+    },
+    screenshot: {
+        flex: 1
+    }
+})
