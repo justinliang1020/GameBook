@@ -1,5 +1,6 @@
-import React from "react"
-import {NavigationContainer} from "@react-navigation/native";
+import React from "react";
+import { Button, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabNavigator from "./TabNavigator";
 import Game from "../screens/Game";
@@ -20,6 +21,21 @@ export default function Router() {
                 <Stack.Screen
                     name={"Game"}
                     component={Game}
+                    options={{
+                        title: "",
+                        headerStyle: {
+                            // backgroundColor: "#4786e7",
+                        },
+                        headerRight: () => (
+                            <View>
+                                <Button
+                                    onPress={() => alert('This is a button!')}
+                                    title="New Review"
+                                    color="black"
+                                />
+                            </View>
+                        )
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
