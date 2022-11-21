@@ -54,6 +54,8 @@ objects: (table in DynamoDB)
   - description: string
   - imageUrl: string
     - (might be called background_image)
+  - screenshotUrl: string
+    - get 1 Url from https://api.rawg.io/docs/#operation/games_screenshots_list
   - name
     - Full name (not slug)
   - platforms: list[string]
@@ -64,6 +66,7 @@ objects: (table in DynamoDB)
       name: "Portal 2",
       gameId: 1,
       imageUrl: 'https://www.mobygames.com/images/covers/l/217599-portal-2-macintosh-front-cover.jpg',
+      screenshotUrl: 'https://i.ytimg.com/vi/Nz2us2JOhiU/maxresdefault.jpg',
       description: "Portal 2 is a fun puzzle game developed by Valve.",
       platforms: ['playstation5', 'playstation4', 'xbox-series-x', 'xbox-one', 'nintendo-switch', 'pc'],
       ratings: {

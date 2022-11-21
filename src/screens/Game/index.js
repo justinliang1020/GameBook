@@ -83,7 +83,6 @@ export default function Game({ route, navigation }) {
         }
         reviewsByParent[parent].push(review)
     }
-    console.log(reviewsByParent)
 
     const [selectedParent, setSelectedParent] = useState(null);
 

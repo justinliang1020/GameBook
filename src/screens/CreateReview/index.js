@@ -1,9 +1,9 @@
-import { Text, View } from 'react-native';
+import { Text, View, SafeAreaView } from 'react-native';
 
 export default function CreateReviewScreen() {
     return (
-        <View>
+        <SafeAreaView>
             <Text> Create Review Screen</Text>
-        </View>
+        </SafeAreaView>
     )
 }
