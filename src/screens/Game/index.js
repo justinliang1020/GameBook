@@ -13,6 +13,14 @@ export default function Game({ route, navigation }) {
     }
     const review2 = {
         id: 2,
+        text: "Portal is also fun on the xbox",
+        username: "Bob",
+        gameId: 1,
+        platform: "xbox-series-x",
+        rating: 4.5
+    }
+    const review3 = {
+        id: 3,
         text: "Portal is great on the switch",
         username: "Justin",
         gameId: 1,
@@ -24,7 +32,7 @@ export default function Game({ route, navigation }) {
     const { game } = route.params
     function getReviews(gameId) {
         // change for API
-        return [review1, review2]
+        return [review1, review2, review3]
     }
     const reviews = getReviews(1);
     const parentPlatformImages = {
@@ -56,10 +64,10 @@ export default function Game({ route, navigation }) {
         "nintendo-switch": "nintendo-switch"
     };
     const parentsToPlatforms = {
-        "pc": "pc",
+        "pc": ["pc"],
         "xbox": ["xbox-one", "xbox-series-x"],
         "playstation": ["playstation4", "playstation5"],
-        "nintendo-switch": "nintendo-swith"
+        "nintendo-switch": ["nintendo-switch"]
     }
 
     // data
@@ -103,6 +111,38 @@ export default function Game({ route, navigation }) {
         );
     };
 
+    const PlatformRatings = ({ }) => (
+        <View>
+            <View style={styles.ratingsList}>
+                <Text>Gamebook Scores</Text>
+                <FlatList
+                    data={parentsToPlatforms[selectedParent]}
+                    renderItem={({ item }) => (
+                        <View style={styles.ratingsItem}>
+                            <Text>{item}</Text>
+                            <Text>{game.ratings[item]}</Text>
+                        </View>
+                    )}
+                    horizontal
+                    contentContainerStyle={styles.platformContentContainer}
+                    scrollEnabled={false}
+                />
+            </View>
+
+            <FlatList
+                data={reviewsByParent[selectedParent]}
+                renderItem={({ item }) => (
+                    <View style={styles.reviewContainer}>
+                        <Text>{item.username}</Text>
+                        <Text>{item.text}</Text>
+                        <Text>Rating: {item.rating}</Text>
+                    </View>
+                )}
+                horizontal
+            />
+        </View>
+    );
+
     return (
         <SafeAreaView style={styles.backgroundContainer}>
             <Text style={styles.title}>{game.name}</Text>
@@ -114,10 +154,11 @@ export default function Game({ route, navigation }) {
                     renderItem={renderParentItem}
                     horizontal
                     contentContainerStyle={styles.platformContentContainer}
+                    scrollEnabled={false}
                 />
             </SafeAreaView>
-            
-            {(() => {
+            {selectedParent ? <PlatformRatings /> : <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />}
+            {/* {(() => {
                 switch (selectedParent) {
                     case "xbox":
                         return <Text>Xbox series x rating: {game.ratings['xbox-series-x']}, xbox one rating: {game.ratings['xbox-one']}</Text>
@@ -135,13 +176,8 @@ export default function Game({ route, navigation }) {
 
                         )
                 }
-            })()}
-            {selectedParent &&
-                <FlatList
-                    data={reviewsByParent[selectedParent]}
-                    renderItem={({ item }) => <View><Text>{item.text}</Text></View>}
-                    horizontal
-                />}
+            })()} */}
+
 
         </SafeAreaView>
     )
@@ -184,11 +220,26 @@ const styles = StyleSheet.create({
     platformItem: {
         marginHorizontal: 10,
     },
-    placeholderContainer: {
-        height: "60%",
+    screenshot: {
+        flex: 1,
         marginHorizontal: 25,
     },
-    screenshot: {
-        flex: 1
-    }
+    ratingsItem: {
+        marginHorizontal: 15,
+
+    },
+    ratingsList: {
+        backgroundColor: "white",
+        marginHorizontal: 70,
+    },
+    reviewContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        // alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        marginVertical: 30,
+        marginHorizontal: 15,
+      },
 })
