@@ -26,6 +26,11 @@ functions: (API endpoints)
   - insert user as entry in user database 
   - return True if success
 
+- login(username: string, password: string) -> bool:
+  - make sure username/password combo is correct in database
+  - return True if success
+  - return False if fail
+
 objects: (table in DynamoDB)
 
 - Review
@@ -46,6 +51,7 @@ objects: (table in DynamoDB)
 
 - User
   - username: string (unique)
+  - password: string
   - reviews: list[reviewId]
   - games: list[gameId]
 
