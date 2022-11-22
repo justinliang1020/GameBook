@@ -1,17 +1,27 @@
 import { Text, View, SafeAreaView, TextInput, StyleSheet, Button, Image } from 'react-native';
 import React from "react";
 
+const MyTextInput = ({ valueVar, name, type, onChange }) => {
+    return (
+         <TextInput
+             style={styles.input}
+             value={valueVar}
+             onChangeText={text => onChange({ name, text })}
+         />
+    );
+ };
+
 export default function ProfileScreen() {
-    const [usernameInput, onChangeUsernameInput] = React.useState("");
-    const [passwordInput, onChangePasswordInput] = React.useState("");
-    const [loggedIn, onChangeLoggedIn] = React.useState(false);
+    const [usernameInput, setUsernameInput] = React.useState("");
+    const [passwordInput, setPasswordInput] = React.useState("");
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
     function login() {
         console.log(`Logging in: ${usernameInput}, ${passwordInput}`)
         var loginSuccess = true;
         if (loginSuccess) {
             global.username = usernameInput;
-            onChangeLoggedIn(true);
+            setLoggedIn(true);
         }
     }
 
@@ -30,15 +40,18 @@ export default function ProfileScreen() {
     const LoginScreen = () => (
         <SafeAreaView>
             <Text style={styles.title}>Login Screen</Text>
+            {/* Weird glitch here where "onChangeText" causes keyboard to close */}
             <TextInput
                 style={styles.input}
-                onChangeText={onChangeUsernameInput}
+                onSubmitEditing={input => {setUsernameInput(input.nativeEvent.text)}}
                 placeholder={"Username"}
+                defaultValue={usernameInput}
             />
             <TextInput
                 style={styles.input}
-                onChangeText={onChangePasswordInput}
+                onSubmitEditing={input => {setPasswordInput(input.nativeEvent.text)}}
                 placeholder={"Password"}
+                defaultValue={passwordInput}
             />
             <View
                 style={{ flexDirection: "row", justifyContent: "center" }}
