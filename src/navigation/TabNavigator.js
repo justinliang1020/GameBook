@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStack from "./HomeStack";
-import CreateReviewStack from "./CreateReviewStack";
+import ProfileStack from "./ProfileStack";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
@@ -24,12 +24,12 @@ export default function TabNavigator() {
                 }}
             />
             <Tab.Screen
-                name="Create Review Stack"
-                component={CreateReviewStack}
+                name="Profile Stack"
+                component={ProfileStack}
                 options={{
-                    title: 'Create Review',
+                    title: 'Profile',
                     tabBarIcon: (() => {
-                        return <Ionicons name="md-add-circle" size={26} />
+                        return <Ionicons name="person-circle-outline" size={26} />
                     })
                 }}
             />

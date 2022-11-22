@@ -22,14 +22,15 @@ functions: (API endpoints)
   - update rating in game
   - return True if success
 
-- createUser(user: json) -> bool:
+- createUser(username, password) -> bool:
   - insert user as entry in user database 
   - return True if success
+  - return False if username is already in database
 
-- login(username: string, password: string) -> bool:
+- login(username: string, password: string) -> user:
   - make sure username/password combo is correct in database
-  - return True if success
-  - return False if fail
+  - return user object if correct
+  - else return nothing
 
 objects: (table in DynamoDB)
 

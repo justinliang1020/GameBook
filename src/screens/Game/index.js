@@ -148,7 +148,7 @@ export default function Game({ route, navigation }) {
             <Text style={styles.title}>{game.name}</Text>
             {!selectedParent && <Text style={styles.description}>{game.description}</Text>}
             {!selectedParent && <Text style={styles.instructionText}>Select a platform to see reviews:</Text>}
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <FlatList style={styles.platformSelector}
                     data={parentPlatforms}
                     renderItem={renderParentItem}
@@ -156,29 +156,8 @@ export default function Game({ route, navigation }) {
                     contentContainerStyle={styles.platformContentContainer}
                     scrollEnabled={false}
                 />
-            </SafeAreaView>
+            </View>
             {selectedParent ? <PlatformRatings /> : <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />}
-            {/* {(() => {
-                switch (selectedParent) {
-                    case "xbox":
-                        return <Text>Xbox series x rating: {game.ratings['xbox-series-x']}, xbox one rating: {game.ratings['xbox-one']}</Text>
-                    case "playstation":
-                        return <Text>Playstation 5 rating: {game.ratings['playstation5']}, Playstation 4 rating: {game.ratings['playstation4']}</Text>
-                    case "nintendo-switch":
-                        return <Text>Nintendo Switch rating: {game.ratings['nintendo-switch']}</Text>
-                    case "pc":
-                        return <Text>PC rating: {game.ratings['pc']}</Text>
-                    default:
-                        return (
-                            <View style={styles.placeholderContainer}>
-                                <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain"/>
-                            </View>
-
-                        )
-                }
-            })()} */}
-
-
         </SafeAreaView>
     )
 }

@@ -29,7 +29,7 @@ export default function Router() {
                         headerRight: () => (
                             <View>
                                 <Button
-                                    onPress={() => alert('This is a button!')}
+                                    onPress={() => console.log(global.username)}
                                     title="New Review"
                                     color="black"
                                 />

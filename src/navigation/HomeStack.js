@@ -14,10 +14,7 @@ function CustomHeader() {
         }}>
             <View>
                 <Text style={styles.title}>
-                    Hey Justin!
-                </Text>
-                <Text>
-                    Welcome to your Gamebook
+                    Welcome to your Gamebook!
                 </Text>
             </View>
 
@@ -45,6 +42,6 @@ export default function HomeStack() {
 const styles = StyleSheet.create({
     title: {
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 25,
     }
 })
