@@ -1,4 +1,4 @@
-import { Pressable, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { Pressable, Modal, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
 import React, { useState } from "react";
 
 export default function Game({ route, navigation }) {
@@ -91,6 +91,7 @@ export default function Game({ route, navigation }) {
     }
 
     const [selectedParent, setSelectedParent] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
 
     // render items
     const ParentItem = ({ item, onPress, active }) => (
@@ -145,19 +146,49 @@ export default function Game({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
-            <Text style={styles.title}>{game.name}</Text>
-            {!selectedParent && <Text style={styles.description}>{game.description}</Text>}
-            {!selectedParent && <Text style={styles.instructionText}>Select a platform to see reviews:</Text>}
-            <View style={styles.container}>
-                <FlatList style={styles.platformSelector}
-                    data={parentPlatforms}
-                    renderItem={renderParentItem}
-                    horizontal
-                    contentContainerStyle={styles.platformContentContainer}
-                    scrollEnabled={false}
+            <View style={{ flex: 1 }}>
+                <Text style={styles.title}>{game.name}</Text>
+                {!selectedParent && <Text style={styles.description}>{game.description}</Text>}
+                {!selectedParent && <Text style={styles.instructionText}>Select a platform to see reviews:</Text>}
+                <View style={styles.container}>
+                    <FlatList style={styles.platformSelector}
+                        data={parentPlatforms}
+                        renderItem={renderParentItem}
+                        horizontal
+                        contentContainerStyle={styles.platformContentContainer}
+                        scrollEnabled={false}
+                    />
+                </View>
+                {selectedParent ? <PlatformRatings /> : <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />}
+            </View>
+            <View style={styles.reviewButtonContainer}>
+                <Button
+                    onPress={() => setModalVisible(true)}
+                    title="hello"
+
                 />
             </View>
-            {selectedParent ? <PlatformRatings /> : <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Hello World!</Text>
+                        <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => setModalVisible(!modalVisible)}
+                        >
+                            <Text style={styles.textStyle}>Hide Modal</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     )
 }
@@ -220,5 +251,35 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         marginVertical: 30,
         marginHorizontal: 15,
-      },
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    reviewButtonContainer: {
+        backgroundColor: "white",
+        marginHorizontal: 150,
+    }
 })

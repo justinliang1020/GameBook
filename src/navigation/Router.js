@@ -26,15 +26,7 @@ export default function Router() {
                         headerStyle: {
                             // backgroundColor: "#4786e7",
                         },
-                        headerRight: () => (
-                            <View>
-                                <Button
-                                    onPress={() => console.log(global.username)}
-                                    title="New Review"
-                                    color="black"
-                                />
-                            </View>
-                        )
+                        headerShown: false
                     }}
                 />
             </Stack.Navigator>
