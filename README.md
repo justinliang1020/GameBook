@@ -14,10 +14,10 @@ functions: (API endpoints)
 - getGameReviews(gameId : int) -> list[Review]:
   - returns a list of "Review" object of a given game
 
-- getUserReviews(username : string) -> list[Reveiw]:
+- getUserReviews(username : string) -> list[Review]:
   - returns a list of "Review" object of a given user
 
-- createReview(review : json) -> bool:
+- submitReview(review : json) -> bool:
   - insert review as entry in review database
   - update rating in game
   - return True if success
@@ -35,7 +35,6 @@ functions: (API endpoints)
 objects: (table in DynamoDB)
 
 - Review
-  - Id : int
   - text : string (max 255 characters, tweet-like)
   - username: string (user)
   - gameId: int

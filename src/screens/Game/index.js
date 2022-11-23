@@ -1,5 +1,7 @@
-import { Pressable, Modal, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import { Pressable, Modal, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Button, StyleSheet, TextInput, Alert } from 'react-native';
 import React, { useState } from "react";
+import { SelectList } from 'react-native-dropdown-select-list'
+
 
 export default function Game({ route, navigation }) {
     // sample data -----
@@ -30,6 +32,21 @@ export default function Game({ route, navigation }) {
     // -------------
 
     const { game } = route.params
+    function submitReview(description, platform, rating) {
+        // - text : string (max 255 characters, tweet-like)
+        // - username: string (user)
+        // - gameId: int
+        // - platform: string
+        // - rating: number
+        const payload = {
+            text: description,
+            platform: platform,
+            rating: Number(rating),
+            gameId: game.gameId,
+            username: global.username
+        }
+        console.log("sending payload: ", payload)
+    }
     function getReviews(gameId) {
         // change for API
         return [review1, review2, review3]
@@ -70,6 +87,15 @@ export default function Game({ route, navigation }) {
         "nintendo-switch": ["nintendo-switch"]
     }
 
+    const platformsOptions = [
+        { key: '1', value: 'pc' },
+        { key: '2', value: 'xbox-series-x' },
+        { key: '3', value: 'xbox-one' },
+        { key: '4', value: 'playstation4' },
+        { key: '5', value: 'playstation5' },
+        { key: '6', value: 'nintendo-switch' },
+    ]
+
     // data
     const parentPlatforms = [];
     for (const platform of game.platforms) {
@@ -92,6 +118,9 @@ export default function Game({ route, navigation }) {
 
     const [selectedParent, setSelectedParent] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const [reviewPlatform, setReviewPlatform] = useState(null);
+    const [reviewRating, setReviewRating] = useState(null);
+    const [reviewDescription, setReviewDescription] = useState("");
 
     // render items
     const ParentItem = ({ item, onPress, active }) => (
@@ -164,7 +193,7 @@ export default function Game({ route, navigation }) {
             <View style={styles.reviewButtonContainer}>
                 <Button
                     onPress={() => setModalVisible(true)}
-                    title="hello"
+                    title="Create Review"
 
                 />
             </View>
@@ -179,12 +208,40 @@ export default function Game({ route, navigation }) {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
+                        <Text>Write a Review for {game.name}</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text>Select a Platform: </Text>
+                            <SelectList
+                                setSelected={(val) => setReviewPlatform(val)}
+                                data={platformsOptions}
+                                save="value"
+                            />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            onSubmitEditing={input => { setReviewRating(input.nativeEvent.text) }}
+                            placeholder={"Rating (1-5)"}
+                            defaultValue={reviewRating}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            onSubmitEditing={input => { setReviewDescription(input.nativeEvent.text) }}
+                            placeholder={"Description"}
+                            defaultValue={reviewDescription}
+                        />
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
+                            onPress={() => {
+                                if (global.username === undefined) {
+                                    Alert.alert("Error: not logged in")
+                                } else {
+                                    console.log("submit review")
+                                    submitReview(reviewDescription, reviewPlatform, reviewRating)
+                                }
+                                setModalVisible(!modalVisible)
+                            }}
                         >
-                            <Text style={styles.textStyle}>Hide Modal</Text>
+                            <Text style={styles.textStyle}>Submit Review</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -259,10 +316,10 @@ const styles = StyleSheet.create({
         marginTop: 22
     },
     modalView: {
-        margin: 20,
+        // margin: 20,
         backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
+        margin: 0,
+        // padding: 100,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -281,5 +338,14 @@ const styles = StyleSheet.create({
     reviewButtonContainer: {
         backgroundColor: "white",
         marginHorizontal: 150,
-    }
+    },
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        textInput: {
+            color: "black",
+        },
+    },
 })

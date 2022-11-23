@@ -1,15 +1,5 @@
-import { Text, View, SafeAreaView, TextInput, StyleSheet, Button, Image } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, StyleSheet, Button, Image, Alert } from 'react-native';
 import React from "react";
-
-const MyTextInput = ({ valueVar, name, type, onChange }) => {
-    return (
-         <TextInput
-             style={styles.input}
-             value={valueVar}
-             onChangeText={text => onChange({ name, text })}
-         />
-    );
- };
 
 export default function ProfileScreen() {
     const [usernameInput, setUsernameInput] = React.useState("");
@@ -18,6 +8,10 @@ export default function ProfileScreen() {
 
     function login() {
         console.log(`Logging in: ${usernameInput}, ${passwordInput}`)
+        if (usernameInput === "" || passwordInput === "") {
+            Alert.alert("Error: input username and password to login")
+            return
+        }
         var loginSuccess = true;
         if (loginSuccess) {
             global.username = usernameInput;
