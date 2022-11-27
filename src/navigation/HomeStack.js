@@ -10,7 +10,7 @@ function CustomHeader() {
     return (
         <View style={{
             flexDirection: "row",
-            
+
         }}>
             <View>
                 <Text style={styles.title}>
@@ -32,7 +32,10 @@ export default function HomeStack() {
                 component={HomeScreen}
                 options={{
                     headerTitle: (props) => <CustomHeader {...props} />,
-                    headerStyle: { backgroundColor: "#4786e7" },
+                    headerStyle: {
+                        backgroundColor: "#4786e7",
+                        height: 125
+                    },
                 }}
             />
         </Stack.Navigator>
