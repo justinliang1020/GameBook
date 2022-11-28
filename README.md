@@ -39,6 +39,7 @@ objects: (table in DynamoDB)
   - username: string (user)
   - gameId: int
   - platform: string
+    - valid: pc, xbox-one, xbox-series-x, playstation4, playstation5, nintendo-switch
   - rating: number
   - sample: {
         id: 1,
@@ -52,8 +53,6 @@ objects: (table in DynamoDB)
 - User
   - username: string (unique)
   - password: string
-  - reviews: list[reviewId]
-  - games: list[gameId]
 
 - Game (mostly parse from https://api.rawg.io/docs/#operation/games_read)
   - gameId: int
