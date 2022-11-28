@@ -7,7 +7,7 @@ export default function Game({ route, navigation }) {
     // sample data -----
     const review1 = {
         id: 1,
-        text: "Portal is great on the xbox",
+        text: "Portal is great on the xbox. I like it because it runs really well. I like shooting portals. Also Valve is a cool company, and I like that they put cool robots in this game also.",
         username: "Justin",
         gameId: 1,
         platform: "xbox-series-x",
@@ -144,13 +144,13 @@ export default function Game({ route, navigation }) {
     const PlatformRatings = ({ }) => (
         <View>
             <View style={styles.ratingsList}>
-                <Text>Gamebook Scores</Text>
+                <Text style={styles.ratingsTitle}>Gamebook Scores</Text>
                 <FlatList
                     data={parentsToPlatforms[selectedParent]}
                     renderItem={({ item }) => (
                         <View style={styles.ratingsItem}>
-                            <Text>{item}</Text>
-                            <Text>{game.ratings[item]}</Text>
+                            <Text style={styles.ratingsNumber}>{game.ratings[item]}</Text>
+                            <Text style={styles.ratingsPlatform}>{item}</Text>
                         </View>
                     )}
                     horizontal
@@ -161,17 +161,29 @@ export default function Game({ route, navigation }) {
 
             <FlatList
                 data={reviewsByParent[selectedParent]}
-                renderItem={({ item }) => (
-                    <View style={styles.reviewContainer}>
-                        <Text>{item.username}</Text>
-                        <Text>{item.text}</Text>
-                        <Text>Rating: {item.rating}</Text>
+                renderItem={({ item, index }) => (
+                    <View style={[styles.reviewContainer, index % 2 == 0 ? { marginRight: 10 } : { marginLeft: 10 }]}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Image style={styles.profileImage} source={require("../../../assets/profile.png")} />
+                            <Text style={styles.reviewUsername}>{item.username}: </Text>
+                            <Text style={styles.reviewRating}>{item.rating}</Text>
+                        </View>
+                        <Text style={styles.reviewDescription}>{item.text}</Text>
+                        {/* <Text>Rating: {item.rating}</Text> */}
                     </View>
                 )}
                 horizontal
+                style={styles.reviewList}
             />
         </View>
     );
+
+    const GameScreenshot = ({ }) => (
+        <View style={{ flex: 1, marginTop: 50 }}>
+            <Text style={styles.instructionText}>Featured Screenshot</Text>
+            <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />
+        </View>
+    )
 
     return (
         <SafeAreaView style={styles.backgroundContainer}>
@@ -188,7 +200,7 @@ export default function Game({ route, navigation }) {
                         scrollEnabled={false}
                     />
                 </View>
-                {selectedParent ? <PlatformRatings /> : <Image source={{ uri: game.screenshotUrl }} style={styles.screenshot} resizeMode="contain" />}
+                {selectedParent ? <PlatformRatings /> : <GameScreenshot />}
             </View>
             <View style={styles.reviewButtonContainer}>
                 <Button
@@ -234,6 +246,12 @@ export default function Game({ route, navigation }) {
                             onPress={() => {
                                 if (global.username === undefined) {
                                     Alert.alert("Error: not logged in")
+                                } else if (reviewPlatform === null) {
+                                    Alert.alert("Error: no platform given")
+                                } else if (reviewRating === null) {
+                                    Alert.alert("Error: no rating given")
+                                } else if (reviewDescription === null) {
+                                    Alert.alert("Error: no description given")
                                 } else {
                                     console.log("submit review")
                                     submitReview(reviewDescription, reviewPlatform, reviewRating)
@@ -270,44 +288,98 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     instructionText: {
-        fontsize: 25,
+        fontSize: 23,
         textAlign: "center",
         color: "#ffffff",
-        marginTop: 20,
+        marginTop: 30,
     },
     platformSelector: {
         backgroundColor: "#ffffff",
-        marginHorizontal: 80,
+        marginHorizontal: 30,
         marginVertical: 15,
+        borderRadius: 10,
+        paddingVertical: 6,
     },
     platformContentContainer: {
         justifyContent: "center",
         flexGrow: 1,
     },
     platformItem: {
-        marginHorizontal: 10,
+        marginHorizontal: 20,
     },
     screenshot: {
-        flex: 1,
         marginHorizontal: 25,
+        height: 200,
     },
     ratingsItem: {
         marginHorizontal: 15,
-
+        alignItems: "center",
+    },
+    ratingsNumber: {
+        color: "#255C97",
+        fontSize: 30,
+        fontWeight: "bold",
+    },
+    ratingsPlatform: {
+        color: "#4474D2",
+        fontSize: 20,
+        fontWeight: "bold"
     },
     ratingsList: {
         backgroundColor: "white",
-        marginHorizontal: 70,
+        marginHorizontal: 30,
+        marginVertical: 30,
+        // borderRadius: 10,
+        paddingVertical: 20,
+        paddingHorizontal: 40,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        borderRadius: 3,
+    },
+    ratingsTitle: {
+        textAlign: "center",
+        color: "#4474D2",
+        fontSize: 30,
+        fontWeight: "bold",
+        marginBottom: 10,
+    },
+    reviewList: {
+        marginHorizontal: 30,
     },
     reviewContainer: {
         flex: 1,
         backgroundColor: '#fff',
         // alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 5,
-        paddingHorizontal: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
         marginVertical: 30,
-        marginHorizontal: 15,
+        borderRadius: 3,
+        width: 300,
+        height: 200,
+    },
+    reviewUsername: {
+        fontWeight: "bold",
+        fontSize: 20,
+    },
+    reviewRating: {
+        fontWeight: "bold",
+        color: "#255C97",
+        fontSize: 20,
+
+    },
+    reviewDescription: {
+        marginTop: 5,
+    },
+    profileImage: {
+        width: 22,
+        height: 22,
+        marginRight: 5,
     },
     centeredView: {
         flex: 1,
@@ -328,7 +400,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        borderRadius: 10,
     },
     button: {
         borderRadius: 20,

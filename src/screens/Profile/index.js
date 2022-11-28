@@ -65,8 +65,7 @@ export default function ProfileScreen() {
     const ProfileScreen = () => (
         <SafeAreaView>
             <Text style={styles.title}>Welcome {global.username}</Text>
-            <Image style={styles.profileImage}
-                source={require("../../../assets/profile.png")} />
+            <Image style={styles.profileImage} source={require("../../../assets/profile.png")} />
             <Text style={styles.description}>Number of Reviews: {numberReviews()}</Text>
             <Text style={styles.description}>Average Rating: {averageRating()}</Text>
         </SafeAreaView>
