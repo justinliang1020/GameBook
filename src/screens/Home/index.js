@@ -1,5 +1,6 @@
-import { Text, View, FlatList, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import { Text, View, FlatList, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import CarouselItem from '../../components/CarouselItem';
+import { useState, useEffect } from 'react';
 
 export default function HomeScreen({ navigation }) {
   const sampleData1 = [
@@ -13,7 +14,7 @@ export default function HomeScreen({ navigation }) {
       ratings: {
         'playstation5': 5,
         'playstation4': 3.4,
-        'xbox-series-x': 4,
+        'xbox-seriers-x': 4,
         'xbox-one': 4.5,
         'nintendo-switch': 3,
         'pc': 5
@@ -29,6 +30,47 @@ export default function HomeScreen({ navigation }) {
     { name: "Splatoon 2", imageUrl: 'https://www.mobygames.com/images/covers/l/416101-splatoon-2-nintendo-switch-front-cover.jpg' },
     { name: "Overcooked 2", imageUrl: "https://www.mobygames.com/images/covers/l/487451-overcooked-2-windows-apps-front-cover.jpg" }
   ]
+
+  const [gameLists, setGameLists] = useState({});
+
+  async function fillGameLists() {
+    var url = new URL("https://fyfwi64te1.execute-api.us-east-1.amazonaws.com/dev/games")
+    const response = await fetch(url).catch(()=> {
+      alert("Error: no internet connection");
+      return;
+    });
+    const res = await response.json();
+    const games = res["Items"];
+
+    const gameSlugs = {
+      "top_rated": ["portal_2", "knockout_city", "borderlands_2", "call_of_duty:_modern_warfare_3"],
+      "trending": ["call_of_duty", "grand_theft_auto_v", "halo_3", "call_of_duty:_black_ops"],
+      "popular": ["marvel's_spider-man", "fifa_22", "madden_nfl_23"],
+    };
+
+    tempGameLists = {}
+    for (const category in gameSlugs) {
+      gameObjs = [];
+      for (const slug of gameSlugs[category]) {
+        // find category in games
+        for (const game of games) {
+          if (slug === game["titleSlug"]) {
+            gameObjs.push(game)
+            break;
+          }
+        }
+      }
+
+      // add using setGameLists
+      tempGameLists[category] = gameObjs
+    }
+    setGameLists(tempGameLists);
+  }
+
+  useEffect(() => {
+    fillGameLists();
+  });
+
   function getGameList(category) {
     switch (category) {
       case "rated":
@@ -43,31 +85,23 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
           <Text style={styles.subTitle}>Top Rated Cross Platform Games</Text>
           <FlatList
-            data={getGameList("rated")}
-            renderItem={({ item }) => <CarouselItem game={item} big/>}
+            data={gameLists["top_rated"]}
+            renderItem={({ item }) => <CarouselItem game={item} big />}
             horizontal
           />
         </View>
         <View style={styles.container}>
-          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
+          <Text style={styles.subTitle}>Trending Games</Text>
           <FlatList
-            data={getGameList("trending")}
+            data={gameLists["trending"]}
             renderItem={({ item }) => <CarouselItem game={item} />}
             horizontal
           />
         </View>
         <View style={styles.container}>
-          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
+          <Text style={styles.subTitle}>Popular Games</Text>
           <FlatList
-            data={getGameList("trending")}
-            renderItem={({ item }) => <CarouselItem game={item} />}
-            horizontal
-          />
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.subTitle}>Trending Games on Your Platforms</Text>
-          <FlatList
-            data={getGameList("trending")}
+            data={gameLists["popular"]}
             renderItem={({ item }) => <CarouselItem game={item} />}
             horizontal
           />

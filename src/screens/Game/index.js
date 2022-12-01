@@ -188,7 +188,7 @@ export default function Game({ route, navigation }) {
     return (
         <SafeAreaView style={styles.backgroundContainer}>
             <View style={{ flex: 1 }}>
-                <Text style={styles.title}>{game.name}</Text>
+                <Text style={styles.title}>{game.title}</Text>
                 {!selectedParent && <Text style={styles.description}>{game.description}</Text>}
                 {!selectedParent && <Text style={styles.instructionText}>Select a platform to see reviews:</Text>}
                 <View style={styles.container}>
@@ -220,7 +220,7 @@ export default function Game({ route, navigation }) {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text>Write a Review for {game.name}</Text>
+                        <Text>Write a Review for {game.title}</Text>
                         <View style={{ flexDirection: "row" }}>
                             <Text>Select a Platform: </Text>
                             <SelectList

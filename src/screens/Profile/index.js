@@ -64,7 +64,7 @@ export default function ProfileScreen() {
                 } else {
                     Alert.alert(JSON.stringify(res));
                 }
-                
+
             } else {
                 Alert.alert(res);
             }
