@@ -1,5 +1,5 @@
 import { Pressable, Modal, Text, View, Image, SafeAreaView, FlatList, TouchableOpacity, Button, StyleSheet, TextInput, Alert } from 'react-native';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SelectList } from 'react-native-dropdown-select-list'
 
 
@@ -29,29 +29,39 @@ export default function Game({ route, navigation }) {
         platform: "nintendo-switch",
         rating: 3
     }
-    // -------------
+
 
     const { game } = route.params
-    function submitReview(description, platform, rating) {
+    async function submitReview(description, platform, rating) {
         // - text : string (max 255 characters, tweet-like)
         // - username: string (user)
         // - gameId: int
         // - platform: string
         // - rating: number
-        const payload = {
-            text: description,
-            platform: platform,
-            rating: Number(rating),
-            gameId: game.gameId,
-            username: global.username
+        var url = new URL("https://fyfwi64te1.execute-api.us-east-1.amazonaws.com/dev/reviews")
+        const params = {
+            "content": description,
+            "platform": platform,
+            "rating": Number(rating),
+            "gameTitle": game.titleSlug,
+            "reviewAuthor": global.username,
+            "sessionKey": global.sessionKey
         }
-        console.log("sending payload: ", payload)
+        console.log("Sending request with params", params)
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+        const response = await fetch(url, {method: "POST"}).catch(() => {
+            alert("Error: no internet connection");
+            return;
+        });
+        const res = await response.json();
+
+        parseReviews();
     }
     function getReviews(gameId) {
         // change for API
         return [review1, review2, review3]
     }
-    const reviews = getReviews(1);
+    // const reviews = getReviews(1);
     const parentPlatformImages = {
         "xbox": {
             active: require('../../../assets/xbox-active.png'),
@@ -96,6 +106,77 @@ export default function Game({ route, navigation }) {
         { key: '6', value: 'nintendo-switch' },
     ]
 
+    // ------------- API data
+    // TODO: make all ratings and review use effects
+    const [ratings, setRatings] = useState({});
+    const [reviews, setReviews] = useState([]);
+    // query API for all reviews of game title
+    async function parseReviews() {
+        var url = new URL("https://fyfwi64te1.execute-api.us-east-1.amazonaws.com/dev/reviews")
+        const params = {
+            "gameTitle": game.titleSlug
+        }
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+        const response = await fetch(url).catch(() => {
+            alert("Error: no internet connection");
+            return;
+        });
+        const res = await response.json();
+        const reviewsRes = res["Items"];
+
+        // set ratings
+        const ratingsCounts = {
+            "pc": 0,
+            "xbox-one": 0,
+            "xbox-series-x": 0,
+            "playstation4": 0,
+            "playstation5": 0,
+            "nintendo-switch": 0
+        };
+        const tempRatings = {
+            "pc": 0,
+            "xbox-one": 0,
+            "xbox-series-x": 0,
+            "playstation4": 0,
+            "playstation5": 0,
+            "nintendo-switch": 0
+        };
+        for (const review of reviewsRes) {
+            const platform = review["platform"];
+            const rating = Number(review["rating"]);
+            tempRatings[platform] += rating;
+            ratingsCounts[platform] += 1;
+        }
+        for (const platform in tempRatings) {
+            tempRatings[platform] /= ratingsCounts[platform]
+        }
+        setRatings(tempRatings)
+
+        // set reviews
+        const tempReviews = {
+            "pc": [],
+            "xbox": [],
+            "playstation": [],
+            "nintendo-switch": []
+        }
+        for (const review of reviewsRes) {
+            const parent = platformsToParents[review.platform];
+            tempReviews[parent].push(review);
+        }
+        setReviews(tempReviews);
+    }
+
+    useEffect(() => {
+        parseReviews();
+    }, [])
+
+    // calculate platform ratings from reviews
+    // sort reviews in (parentPlatform: [review])
+    // modify review rendering to fit new object
+
+
+    // --------
+
     // data
     const parentPlatforms = [];
     for (const platform of game.platforms) {
@@ -105,16 +186,16 @@ export default function Game({ route, navigation }) {
         }
     }
 
-    const reviewsByParent = {}
-    for (const review of reviews) {
-        const platform = review["platform"];
-        const parent = platformsToParents[platform]
+    // const reviewsByParent = {}
+    // for (const review of reviews) {
+    //     const platform = review["platform"];
+    //     const parent = platformsToParents[platform]
 
-        if (!(parent in reviewsByParent)) {
-            reviewsByParent[parent] = []
-        }
-        reviewsByParent[parent].push(review)
-    }
+    //     if (!(parent in reviewsByParent)) {
+    //         reviewsByParent[parent] = []
+    //     }
+    //     reviewsByParent[parent].push(review)
+    // }
 
     const [selectedParent, setSelectedParent] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
@@ -149,7 +230,7 @@ export default function Game({ route, navigation }) {
                     data={parentsToPlatforms[selectedParent]}
                     renderItem={({ item }) => (
                         <View style={styles.ratingsItem}>
-                            <Text style={styles.ratingsNumber}>{game.ratings[item]}</Text>
+                            <Text style={styles.ratingsNumber}>{ratings[item]}</Text>
                             <Text style={styles.ratingsPlatform}>{item}</Text>
                         </View>
                     )}
@@ -160,15 +241,15 @@ export default function Game({ route, navigation }) {
             </View>
 
             <FlatList
-                data={reviewsByParent[selectedParent]}
+                data={reviews[selectedParent]}
                 renderItem={({ item, index }) => (
                     <View style={[styles.reviewContainer, index % 2 == 0 ? { marginRight: 10 } : { marginLeft: 10 }]}>
                         <View style={{ flexDirection: "row" }}>
                             <Image style={styles.profileImage} source={require("../../../assets/profile.png")} />
-                            <Text style={styles.reviewUsername}>{item.username}: </Text>
+                            <Text style={styles.reviewUsername}>{item.reviewAuthor}: </Text>
                             <Text style={styles.reviewRating}>{item.rating}</Text>
                         </View>
-                        <Text style={styles.reviewDescription}>{item.text}</Text>
+                        <Text style={styles.reviewDescription}>{item.content}</Text>
                         {/* <Text>Rating: {item.rating}</Text> */}
                     </View>
                 )}
