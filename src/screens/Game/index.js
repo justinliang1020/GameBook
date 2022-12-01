@@ -38,6 +38,10 @@ export default function Game({ route, navigation }) {
         // - gameId: int
         // - platform: string
         // - rating: number
+        if (description.length > 800) {
+            Alert.alert("Error: Review must be less than 800 characters");
+            return;
+        }
         var url = new URL("https://fyfwi64te1.execute-api.us-east-1.amazonaws.com/dev/reviews")
         const params = {
             "content": description,
